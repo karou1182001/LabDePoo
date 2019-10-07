@@ -17,10 +17,10 @@ import javax.swing.JOptionPane;
  */
 public class Conexion
 {
-    public String db= "baseDeDatos";
-    public String url;
-    public String user;
-    public String pass;
+    public String db= "baseblackboard";
+    public String url="jdbc:mysql://127.0.0.1/" + db;
+    public String user= "root";
+    public String pass="";
     
     //Constructor:
     public Conexion()
@@ -34,8 +34,10 @@ public class Conexion
        Connection link= null;
         try 
         {
-           Class.forName("org.git.mm.mysql.Driver");
+           
+           Class.forName("org.gjt.mm.mysql.Driver");
            link= DriverManager.getConnection(this.url, this.user, this.pass);
+          
         } 
         catch (ClassNotFoundException | SQLException e) 
         {
