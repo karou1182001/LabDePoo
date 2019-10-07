@@ -183,7 +183,7 @@ public class JFUsuario extends javax.swing.JFrame {
 
         jLabel7.setText("Contraseña:");
 
-        comboBoxTU.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Estudiante", "Profesor" }));
+        comboBoxTU.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Estudiante", "Profesor", "Docente auxiliar" }));
         comboBoxTU.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboBoxTUActionPerformed(evt);
