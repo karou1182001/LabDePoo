@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  */
 public class Conexion
 {
-    public String db= "baseblackboard";
+    public String db= "baseblackboardc";
     public String url="jdbc:mysql://127.0.0.1/" + db;
     public String user= "root";
     public String pass="";

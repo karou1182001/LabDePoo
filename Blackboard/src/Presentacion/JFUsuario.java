@@ -128,6 +128,9 @@ public class JFUsuario extends javax.swing.JFrame {
         bBuscar = new javax.swing.JButton();
         lbTotalRegistros = new javax.swing.JLabel();
         bMostrarTodo = new javax.swing.JButton();
+        bAtras2 = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -286,6 +289,13 @@ public class JFUsuario extends javax.swing.JFrame {
             }
         });
 
+        bAtras2.setText("<<");
+        bAtras2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bAtras2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -296,14 +306,16 @@ public class JFUsuario extends javax.swing.JFrame {
                     .addComponent(jScrollPane1)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(bBuscar)
                         .addGap(18, 18, 18)
                         .addComponent(bMostrarTodo)
                         .addGap(0, 138, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(29, 29, 29)
+                .addComponent(bAtras2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lbTotalRegistros)
                 .addGap(106, 106, 106))
         );
@@ -318,9 +330,16 @@ public class JFUsuario extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbTotalRegistros)
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbTotalRegistros)
+                    .addComponent(bAtras2))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jLabel11.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jLabel11.setText("NOTA:");
+
+        jLabel12.setText("Para eliminar sólo necesita digitar el código");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -328,8 +347,12 @@ public class JFUsuario extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel12))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
@@ -362,17 +385,21 @@ public class JFUsuario extends javax.swing.JFrame {
                                 .addComponent(comboBoxTU, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(txtNomUsuario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(10, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel12))
+                        .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(comboBoxTU, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -412,11 +439,9 @@ public class JFUsuario extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(bEliminar)
                             .addComponent(bNuevo)
-                            .addComponent(bGuardar))
-                        .addGap(19, 19, 19))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(bGuardar)))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -474,9 +499,7 @@ public class JFUsuario extends javax.swing.JFrame {
                 dts.setEdad(value);
                 dts.setCorreo(txtCorreoUsuario.getText());
                 dts.setContraseña(txtContraseña.getText());
-                
                 dts.setCedula(Integer.parseInt(txtCedulaUsuario.getText()));
-                JOptionPane.showMessageDialog(rootPane, "Llega 3");
                 
 
                 //Pasa algo dependiendo de si el botón tiene la acción de guardar o 
@@ -497,9 +520,7 @@ public class JFUsuario extends javax.swing.JFrame {
                 }
                 else if(accion.equals("editar"))
                 {
-                   JOptionPane.showMessageDialog(rootPane, "Después");
                    dts.setCodigo(Integer.parseInt(txtCod.getText()));
-                    JOptionPane.showMessageDialog(rootPane, "No llega");
 
                    if (func.editar(dts))
                    {
@@ -511,8 +532,8 @@ public class JFUsuario extends javax.swing.JFrame {
                 }
             } catch (Exception e) 
             {
-                JOptionPane.showMessageDialog(null, "Dígitó un tipo de dato "
-                        + "erróneo en un campo");
+                JOptionPane.showMessageDialog(null, "Hay algún dato mal digitado");
+                JOptionPane.showMessageDialog(null, e.getMessage());
             }
         }  
     }//GEN-LAST:event_bGuardarActionPerformed
@@ -576,8 +597,8 @@ public class JFUsuario extends javax.swing.JFrame {
         txtCod.setText(tUsuarios.getValueAt(fila, 0).toString());
         txtNomUsuario.setText(tUsuarios.getValueAt(fila, 1).toString());
         txtApUsuario.setText(tUsuarios.getValueAt(fila, 2).toString());
-        txtCorreoUsuario.setText(tUsuarios.getValueAt(fila, 4).toString());
-        txtCedulaUsuario.setText(tUsuarios.getValueAt(fila, 5).toString());
+        txtCedulaUsuario.setText(tUsuarios.getValueAt(fila, 4).toString());
+        txtCorreoUsuario.setText(tUsuarios.getValueAt(fila, 5).toString());
         txtContraseña.setText(tUsuarios.getValueAt(fila, 6).toString());
         txtCContraseña.setText(tUsuarios.getValueAt(fila, 6).toString());
         comboBoxTU.setSelectedItem(tUsuarios.getValueAt(fila, 7).toString());
@@ -595,6 +616,14 @@ public class JFUsuario extends javax.swing.JFrame {
         inhabilitar();
         mostrar("");
     }//GEN-LAST:event_bMostrarTodoActionPerformed
+
+    private void bAtras2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAtras2ActionPerformed
+        //Devolverse a la ventana de las opciones del administrador
+        JFGrupos ventana = new JFGrupos();
+        ventana.setVisible(true);
+        //Cerrar ventana actual
+        this.dispose();
+    }//GEN-LAST:event_bAtras2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -632,6 +661,7 @@ public class JFUsuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bAtras2;
     private javax.swing.JButton bBuscar;
     private javax.swing.JButton bEliminar;
     private javax.swing.JButton bGuardar;
@@ -640,6 +670,8 @@ public class JFUsuario extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> comboBoxTU;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
