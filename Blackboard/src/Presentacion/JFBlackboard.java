@@ -99,9 +99,9 @@ public class JFBlackboard extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("nombre");
+        jLabel2.setText("usuario");
 
-        jLabel3.setText("codigo");
+        jLabel3.setText("contraseña");
 
         txtContrasenaIS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -251,26 +251,12 @@ public class JFBlackboard extends javax.swing.JFrame {
         
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/blackboardc","root","");
-            String sql = "Select * from logindatabase where username=? and Password=?";
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/baseblackboardc","root","");
+            //String sql = "Select * from logindatabase where username=? and Password=?";
+            String sql = "Select * from registrousuarios where nombres=? and contraseña=?";
             PreparedStatement pst = con.prepareStatement(sql);
-            pst.setString(0,txtContrasenaIS.getText());
             pst.setString(1,txtUsuarioIS.getText());
-            if(Choice.equals(est)){
-            pst.setString(7,est);
-            }else{
-            if(Choice.equals(prof)){
-            pst.setString(7, prof);
-            }else{
-        
-        if(Choice.equals(adm)){
-        pst.setString(7,adm);
-        }else{
-            JOptionPane.showMessageDialog(null, "No ingreso tipo de usuario");
-        
-              }
-           }
-        }
+            pst.setString(2,txtContrasenaIS.getText());
             ResultSet rs = pst.executeQuery();
             if(rs.next()){
                 JOptionPane.showMessageDialog(null,"username y password y su tipo de usuario  son correctos");
