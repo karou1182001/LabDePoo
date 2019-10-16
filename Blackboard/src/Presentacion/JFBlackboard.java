@@ -5,6 +5,12 @@
  */
 package Presentacion;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author María Zapata
@@ -93,9 +99,9 @@ public class JFBlackboard extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Usuario");
+        jLabel2.setText("nombre");
 
-        jLabel3.setText("Contraseña");
+        jLabel3.setText("codigo");
 
         txtContrasenaIS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -238,7 +244,28 @@ public class JFBlackboard extends javax.swing.JFrame {
 
         String usuario = this.txtUsuarioIS.getText();
         String pass = this.txtContrasenaIS.getText();
-       
+        
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/blackboardc","root","");
+            String sql = "Select * from logindatabase where username=? and Password=?";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(1,txtContrasenaIS.getText());
+            pst.setString(2,txtUsuarioIS.getText());
+            ResultSet rs = pst.executeQuery();
+            if(rs.next()){
+                JOptionPane.showMessageDialog(null,"username and password  son correctos");
+            }else{
+                JOptionPane.showMessageDialog(null,"username and password  no son correctos");
+                txtUsuarioIS.setText("");
+                txtContrasenaIS.setText("");
+            }
+            con.close();
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null,e);
+        }
+        
 
     }//GEN-LAST:event_bSolInicioActionPerformed
 

@@ -250,12 +250,12 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Usuario"/>
+                <Property name="text" type="java.lang.String" value="nombre"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Contrase&#xf1;a"/>
+                <Property name="text" type="java.lang.String" value="codigo"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JPasswordField" name="txtContrasenaIS">
