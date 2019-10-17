@@ -49,6 +49,7 @@ public class JFBlackboard extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(30, 160, 250));
 
@@ -92,14 +93,14 @@ public class JFBlackboard extends javax.swing.JFrame {
 
         jLabel4.setText("Tipo de usuario");
 
-        SelectUS.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Estudiante", "Profesor", "Administrador" }));
+        SelectUS.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Estudiante", "Profesor" }));
         SelectUS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SelectUSActionPerformed(evt);
             }
         });
 
-        jLabel2.setText("usuario");
+        jLabel2.setText("nombre");
 
         jLabel3.setText("contraseña");
 
@@ -128,6 +129,13 @@ public class JFBlackboard extends javax.swing.JFrame {
         jLabel8.setText("learn");
 
         jLabel9.setText("version JKM");
+
+        jButton1.setText("Administrador");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -163,6 +171,10 @@ public class JFBlackboard extends javax.swing.JFrame {
                         .addGap(314, 314, 314)
                         .addComponent(jLabel9)))
                 .addContainerGap(235, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(17, 17, 17))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -175,7 +187,9 @@ public class JFBlackboard extends javax.swing.JFrame {
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel7)
                         .addGap(63, 63, 63)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,9 +259,9 @@ public class JFBlackboard extends javax.swing.JFrame {
         String usuario = this.txtUsuarioIS.getText();
         String pass = this.txtContrasenaIS.getText();
         String Choice = SelectUS.getSelectedItem().toString();
-        String adm ="Administrador";
         String est ="Estudiante";
         String prof = "Profesor";
+        
         
         try{
             Class.forName("com.mysql.jdbc.Driver");
@@ -270,15 +284,7 @@ public class JFBlackboard extends javax.swing.JFrame {
             abrir.setVisible(true); 
             this.dispose();
             }else{
-        
-        if(Choice.equals(adm)){
-        PAdministrador abrir=new PAdministrador();
-        abrir.setVisible(true);
-        this.dispose();
-        }else{
-            JOptionPane.showMessageDialog(null, "No ingreso tipo de usuario");
-        
-              }
+                JOptionPane.showMessageDialog(null, "No ingreso tipo de usuario");
            }
         }
             }else{
@@ -302,6 +308,12 @@ public class JFBlackboard extends javax.swing.JFrame {
     private void txtContrasenaISActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContrasenaISActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtContrasenaISActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        PAdministrador abrir=new PAdministrador();
+            abrir.setVisible(true); 
+            this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -341,6 +353,7 @@ public class JFBlackboard extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> SelectUS;
     private javax.swing.JButton bSolInicio;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
