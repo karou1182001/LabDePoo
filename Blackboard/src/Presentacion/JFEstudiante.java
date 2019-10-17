@@ -63,7 +63,7 @@ public class JFEstudiante extends javax.swing.JFrame {
           tEstudiante.setModel(modelo);
           //Al label total de registros le vamos a signar el valor obtenido en 
           //la subrutina mostrar de la clase fUsuario
-          lbTotalRegistros.setText("Total de registros: "+ Integer.toString(func.totalRegistros));
+          lbTotalRegistros2.setText("Total de registros: "+ Integer.toString(func.totalRegistros));
         } catch (Exception e)
         {
             JOptionPane.showConfirmDialog(rootPane, e);
@@ -90,6 +90,7 @@ public class JFEstudiante extends javax.swing.JFrame {
         txtBuscar2 = new javax.swing.JTextField();
         bBuscar2 = new javax.swing.JButton();
         bMostrarTodo2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -189,6 +190,13 @@ public class JFEstudiante extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("<<");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -201,7 +209,8 @@ public class JFEstudiante extends javax.swing.JFrame {
                 .addComponent(bMostrarTodo2)
                 .addGap(40, 40, 40))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lbTotalRegistros2)
                 .addGap(71, 71, 71))
             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -215,10 +224,12 @@ public class JFEstudiante extends javax.swing.JFrame {
                     .addComponent(bBuscar2)
                     .addComponent(bMostrarTodo2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbTotalRegistros2)
-                .addGap(23, 23, 23))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbTotalRegistros2)
+                    .addComponent(jButton1))
+                .addGap(17, 17, 17))
         );
 
         jLabel2.setText("Para eliminar sólo decesita el digitar el código");
@@ -440,7 +451,7 @@ public class JFEstudiante extends javax.swing.JFrame {
         bEliminar.setEnabled(true);
         accion="editar";
 
-        int fila= tCursos.rowAtPoint(evt.getPoint());
+        int fila= tEstudiante.rowAtPoint(evt.getPoint());
         //Poner los datos que estaban en la fila dentro de la caja de texto
         //nuevamente
 
@@ -455,13 +466,19 @@ public class JFEstudiante extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscar2ActionPerformed
 
     private void bBuscar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBuscar2ActionPerformed
-        mostrar(txtBuscar.getText());
+        mostrar(txtBuscar2.getText());
     }//GEN-LAST:event_bBuscar2ActionPerformed
 
     private void bMostrarTodo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bMostrarTodo2ActionPerformed
         inhabilitar();
         mostrar("");
     }//GEN-LAST:event_bMostrarTodo2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        JFBlackboard abrir=new JFBlackboard();
+            abrir.setVisible(true); 
+            this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -499,16 +516,13 @@ public class JFEstudiante extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bBuscar;
-    private javax.swing.JButton bBuscar1;
     private javax.swing.JButton bBuscar2;
     private javax.swing.JButton bEliminar;
     private javax.swing.JButton bGuardar;
-    private javax.swing.JButton bMostrarTodo;
-    private javax.swing.JButton bMostrarTodo1;
     private javax.swing.JButton bMostrarTodo2;
     private javax.swing.JButton bNuevo;
     private javax.swing.JComboBox<String> cbAsis;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -517,20 +531,10 @@ public class JFEstudiante extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JLabel lbTotalRegistros;
-    private javax.swing.JLabel lbTotalRegistros1;
     private javax.swing.JLabel lbTotalRegistros2;
-    private javax.swing.JTable tCursos;
-    private javax.swing.JTable tCursos1;
     private javax.swing.JTable tEstudiante;
-    private javax.swing.JTextField txtBuscar;
-    private javax.swing.JTextField txtBuscar1;
     private javax.swing.JTextField txtBuscar2;
     private javax.swing.JTextField txtCarrera;
     private javax.swing.JTextField txtCodigoEst;

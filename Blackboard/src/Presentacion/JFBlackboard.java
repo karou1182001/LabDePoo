@@ -5,6 +5,12 @@
  */
 package Presentacion;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author María Zapata
@@ -34,7 +40,7 @@ public class JFBlackboard extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         txtUsuarioIS = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        comboBoxUsuarioIS = new javax.swing.JComboBox<>();
+        SelectUS = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtContrasenaIS = new javax.swing.JPasswordField();
@@ -43,6 +49,7 @@ public class JFBlackboard extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(30, 160, 250));
 
@@ -86,16 +93,16 @@ public class JFBlackboard extends javax.swing.JFrame {
 
         jLabel4.setText("Tipo de usuario");
 
-        comboBoxUsuarioIS.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Estudiante", "Profesor", "Administrador" }));
-        comboBoxUsuarioIS.addActionListener(new java.awt.event.ActionListener() {
+        SelectUS.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Estudiante", "Profesor" }));
+        SelectUS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboBoxUsuarioISActionPerformed(evt);
+                SelectUSActionPerformed(evt);
             }
         });
 
-        jLabel2.setText("Usuario");
+        jLabel2.setText("nombre");
 
-        jLabel3.setText("Contraseña");
+        jLabel3.setText("contraseña");
 
         txtContrasenaIS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -123,6 +130,13 @@ public class JFBlackboard extends javax.swing.JFrame {
 
         jLabel9.setText("version JKM");
 
+        jButton1.setText("Administrador");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -138,7 +152,7 @@ public class JFBlackboard extends javax.swing.JFrame {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(comboBoxUsuarioIS, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(SelectUS, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel1)
@@ -157,6 +171,10 @@ public class JFBlackboard extends javax.swing.JFrame {
                         .addGap(314, 314, 314)
                         .addComponent(jLabel9)))
                 .addContainerGap(235, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(17, 17, 17))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,7 +187,9 @@ public class JFBlackboard extends javax.swing.JFrame {
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel7)
                         .addGap(63, 63, 63)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,7 +201,7 @@ public class JFBlackboard extends javax.swing.JFrame {
                     .addComponent(txtContrasenaIS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboBoxUsuarioIS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SelectUS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
                 .addComponent(bSolInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -238,17 +258,62 @@ public class JFBlackboard extends javax.swing.JFrame {
 
         String usuario = this.txtUsuarioIS.getText();
         String pass = this.txtContrasenaIS.getText();
-       
+        String Choice = SelectUS.getSelectedItem().toString();
+        String est ="Estudiante";
+        String prof = "Profesor";
+        
+        
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/baseblackboardc","root","");
+            //String sql = "Select * from logindatabase where username=? and Password=?";
+            String sql = "Select * from registrousuarios where nombres=? and contraseña=?";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(1,txtUsuarioIS.getText());
+            pst.setString(2,txtContrasenaIS.getText());
+            ResultSet rs = pst.executeQuery();
+            if(rs.next()){
+                JOptionPane.showMessageDialog(null,"username y password y su tipo de usuario  son correctos");
+                if(Choice.equals(est)){
+            JFEstudiante abrir=new JFEstudiante();
+            abrir.setVisible(true);
+            this.dispose();
+            }else{
+            if(Choice.equals(prof)){
+                PProfesor abrir=new PProfesor();
+            abrir.setVisible(true); 
+            this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(null, "No ingreso tipo de usuario");
+           }
+        }
+            }else{
+                JOptionPane.showMessageDialog(null,"username y password o su tipo de usuario  no son correctos");
+                txtUsuarioIS.setText("");
+                txtContrasenaIS.setText("");
+            }
+            con.close();
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null,e);
+        }
+        
 
     }//GEN-LAST:event_bSolInicioActionPerformed
 
-    private void comboBoxUsuarioISActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxUsuarioISActionPerformed
+    private void SelectUSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectUSActionPerformed
 
-    }//GEN-LAST:event_comboBoxUsuarioISActionPerformed
+    }//GEN-LAST:event_SelectUSActionPerformed
 
     private void txtContrasenaISActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContrasenaISActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtContrasenaISActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        PAdministrador abrir=new PAdministrador();
+            abrir.setVisible(true); 
+            this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -286,8 +351,9 @@ public class JFBlackboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> SelectUS;
     private javax.swing.JButton bSolInicio;
-    private javax.swing.JComboBox<String> comboBoxUsuarioIS;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
